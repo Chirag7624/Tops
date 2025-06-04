@@ -1,0 +1,109 @@
+ create database assignment;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> use assignment;
+Database changed
+mysql> create table product(product_id int primary key auto increment not null, PRO_NAME varchar(50) pro_price decimal, pro_com int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'auto increment not null, PRO_NAME varchar(50) pro_price decimal, pro_com int)' at line 1
+mysql> create table product(product_id int primary key auto_increment not null, PRO_NAME varchar(50) pro_price decimal, pro_com int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'pro_price decimal, pro_com int)' at line 1
+mysql> create table product(product_id int primary key auto_increment not null, PRO_NAME varchar(50) pro_price decimal(10,2), pro_com int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'pro_price decimal(10,2), pro_com int)' at line 1
+mysql> create table product(product_id int primary key auto_increment not null, PRO_NAME varchar(50), pro_price decimal(10,2), pro_com int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into product value (101,"mother bord",3200.00,15);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product value (102,"key bord",450.00,16);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product value (103,"zip drive",250.00,14);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product value (104,"spicker",550.00,16);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product value (105,"moniter",5000.00,11);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product value (106,"dvd drive",900.00,12);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product value (107,"cd drive",800.00,12);;
+Query OK, 1 row affected (0.00 sec)
+
+ERROR:
+No query specified
+
+mysql> insert into product value (107,"cd drive",800.00,12);
+ERROR 1062 (23000): Duplicate entry '107' for key 'product.PRIMARY'
+mysql> select * from product;
++------------+-------------+-----------+---------+
+| product_id | PRO_NAME    | pro_price | pro_com |
++------------+-------------+-----------+---------+
+|        101 | mother bord |   3200.00 |      15 |
+|        102 | key bord    |    450.00 |      16 |
+|        103 | zip drive   |    250.00 |      14 |
+|        104 | spicker     |    550.00 |      16 |
+|        105 | moniter     |   5000.00 |      11 |
+|        106 | dvd drive   |    900.00 |      12 |
+|        107 | cd drive    |    800.00 |      12 |
++------------+-------------+-----------+---------+
+7 rows in set (0.00 sec)
+
+mysql> insert into product value (108,"refill cartridge",2600.00,13);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product value (109,"pointer",350.00,13);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product value (110,"mouse",250.00,12);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from product;
++------------+------------------+-----------+---------+
+| product_id | PRO_NAME         | pro_price | pro_com |
++------------+------------------+-----------+---------+
+|        101 | mother bord      |   3200.00 |      15 |
+|        102 | key bord         |    450.00 |      16 |
+|        103 | zip drive        |    250.00 |      14 |
+|        104 | spicker          |    550.00 |      16 |
+|        105 | moniter          |   5000.00 |      11 |
+|        106 | dvd drive        |    900.00 |      12 |
+|        107 | cd drive         |    800.00 |      12 |
+|        108 | refill cartridge |   2600.00 |      13 |
+|        109 | pointer          |    350.00 |      13 |
+|        110 | mouse            |    250.00 |      12 |
++------------+------------------+-----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select * from product where price >= 250
+    -> ^C
+mysql> select * from product where price >= 250;
+ERROR 1054 (42S22): Unknown column 'price' in 'where clause'
+mysql> select * from product  where pro_price >= 250;
++------------+------------------+-----------+---------+
+| product_id | PRO_NAME         | pro_price | pro_com |
++------------+------------------+-----------+---------+
+|        101 | mother bord      |   3200.00 |      15 |
+|        102 | key bord         |    450.00 |      16 |
+|        103 | zip drive        |    250.00 |      14 |
+|        104 | spicker          |    550.00 |      16 |
+|        105 | moniter          |   5000.00 |      11 |
+|        106 | dvd drive        |    900.00 |      12 |
+|        107 | cd drive         |    800.00 |      12 |
+|        108 | refill cartridge |   2600.00 |      13 |
+|        109 | pointer          |    350.00 |      13 |
+|        110 | mouse            |    250.00 |      12 |
++------------+------------------+-----------+---------+
+10 rows in set (0.00 sec)
+
+
+mysql> select max(pro_price) from product;;
++----------------+
+| max(pro_price) |
++----------------+
+|        5000.00 |
++----------------+
+1 row in set (0.00 sec)
